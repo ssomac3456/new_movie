@@ -13,15 +13,21 @@ export default function Home() {
   // 리액트가 새 값으로 화면을 다시 그려줘.
   const [loading, setLoading] = useState(true);
 
+  //useEffect(() => {}, []);
+  //useEffect 어떤 작업을 언제 실행할지 react에게 알려주는 함수
 
-  useEffect();
+  useEffect(() => {
 
-  // 로딩중일때는 로딩화면만 보여줘
-  // if (loading) {
-  //   return <Loading/>
-  // }
+    setLoading(false);
+    //useEffect가 영화 데이터를 가져오면 로딩이 false가 됨
+  }, []);
 
-  don
+  //로딩중일때는 로딩화면만 보여줘
+  if (loading) {
+    return <Loading/>
+  }
+
+  
   return (
     <>
       <Section1 />
