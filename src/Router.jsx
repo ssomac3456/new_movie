@@ -13,6 +13,9 @@ export default function Router() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<Movie />} />
+        {/* :id 어떤값이 와도 이자리에 오는 값을 변수처럼 받아준다. 
+        현재 주소를 확인하고 어떤 Route와 맞는지 찾고 :id 값을 기억해 둬.
+        useParams랑 세트임*/}
         <Route path="/search" element={<Search />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
