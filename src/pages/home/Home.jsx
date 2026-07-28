@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import Section1 from "./components/Section1";
 import Section2 from "./components/Section2";
 import Loading from "../../components/Loading";
-import { getNowPlaying, getPopular, getTopRated, getUpcoming } from "../../api/movieApi";
+import {
+  getNowPlaying,
+  getPopular,
+  getTopRated,
+  getUpcoming,
+} from "../../api/movieApi";
+import PageTitle from "../../components/PageTitle";
 
 export default function Home() {
   const [movieData, setMovieData] = useState({});
-  //movieData 영화데이터를 담는 변수 
+  //movieData 영화데이터를 담는 변수
   //setMovieData 무비데이터를 바꾸는 함수가 들어있는 변수
   //movieData라는 값을 기억해둬.
   // 처음 값은 빈 객체 {}야.
@@ -38,11 +44,10 @@ export default function Home() {
           nowPlaying,
           popular,
           topRated,
-          upComing,        
-      });
+          upComing,
+        });
         // 영화 데이터 4개를 객체에 저장한다.
         //객체 속성 이름 nowPlaying:nowPlaying, 의 줄임 같은이름은 한번만 써도됨 (이변수가 이속성이다.)
-
       } catch (error) {
         console.log(error);
         //무슨오류가 났는지 콘솔에 출력
@@ -50,29 +55,49 @@ export default function Home() {
         setLoading(false);
         // 영화 요청이 성공하든 실패하든 마지막에 loading을 false로 바꾼다.
       }
-
     })();
     //(async () => {})(); 유즈이펙트안에서 await를 쓰기위해 async 함수를 하나 더 만들고, 그함수를 즉시 실행한다.
-    //try 하고싶은 코드 
+    //try 하고싶은 코드
     //catch (error) 실패했을때
     //finally 성공하든 실패하든 로딩은 끝난다.
-
-
   }, []);
 
   //로딩중일때는 로딩화면만 보여줘
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
+  const nowPlayingData = movieData?.nowPlaying?.response;
+  const popularData = movieData?.popular?.response;
+  const topRatedData = movieData?.topRated?.response;
+  const upComingData = movieData?.upComing?.response;
+  console.log(movieData);
+  //movieData가 있니?>있으면 nowPlaying으로 가>없으면 멈춰.
+  //없으면 에러를 내지 말고 그냥 undefined를 반환해.
+  //   nowPlaying = {
+  //   response: {
+  //     page: 1,
+  //     results: [
+  //       영화1,
+  //       영화2,
+  //       영화3
+  //     ]
+  //   }
+  // }
 
   return (
-    <>
-      <Section1 />
+    <div className="min-h-screen">
+      <PageTitle title={"HOME"} />
+
+      <Section1 data={nowPlayingData.results[1]} />
+
       <div className="px-5 lg:px-20 xl:px-48 py-2">
-        <Section2 />
+        <Section2 title={"현재상영중"} data={nowPlayingData} />
+        <Section2 title={"최고평점"} data={topRatedData} />
+        <Section2 title={"인기 영화"} data={popularData} />
+        <Section2 title={"개봉예정"} data={upComingData} />
       </div>
-    </>
+    </div>
   );
 }
 
