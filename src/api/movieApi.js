@@ -42,12 +42,9 @@ const fetchMovie = async (endpoint) => {
   // return response.json();
   // //response 안에는 데이터가 json 형태로 들어있다.
 
-  const response = await fetch(url, options).then((res) => res.json());
-  //fetch 요청하고 응답이 오면 json으로 바꾸고 그 모든 작업이 끝날 때까지 기다렸다가 response에 저장
+  const response = await fetch(url, options);
 
-  return { response };
-  // response를 response라는 이름의 객체로 한 번 감싸서 반환
-  //프로젝트 전체에서 응답 데이터를 항상 response라는 속성으로 통일해서 사용할 수 있음.
+  return response.json();
 };
 
 //영화 리스트 요청
@@ -60,7 +57,7 @@ export const getUpcoming = () => fetchMovie("movie/upcoming");
 
 //영화 상세 요청
 //movies details
-export const getDetail = (movie_id) => fetchMovie(`movie/$(movie_id)`);
+export const getDetail = (movie_id) => fetchMovie(`movie/${movie_id}`);
 //함수 안에서 사용할 값이 실행할 때마다 달라진다면 그 값을 외부에서 받기 위해 매개변수를 만든다
 
 //영화 검색

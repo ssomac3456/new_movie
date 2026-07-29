@@ -67,11 +67,10 @@ export default function Home() {
     return <Loading />;
   }
 
-  const nowPlayingData = movieData?.nowPlaying?.response;
-  const popularData = movieData?.popular?.response;
-  const topRatedData = movieData?.topRated?.response;
-  const upComingData = movieData?.upComing?.response;
-  console.log(movieData);
+  const nowPlayingData = movieData?.nowPlaying;
+  const popularData = movieData?.popular;
+  const topRatedData = movieData?.topRated;
+  const upComingData = movieData?.upComing;
   //movieData가 있니?>있으면 nowPlaying으로 가>없으면 멈춰.
   //없으면 에러를 내지 말고 그냥 undefined를 반환해.
   //   nowPlaying = {
