@@ -25,7 +25,7 @@ export default function Section1({ data }) {
             : "등록된 영화 설명이 없습니다."}
         </p>
         <Link
-          to={`/movie/${data}`}
+          to={`/movie/${data.id}`}
           className="px-8 py-4 
           bg-red-500 rounded-lg hover:bg-red-700 transition"
         >
